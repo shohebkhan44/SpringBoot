@@ -1,22 +1,23 @@
 package com.example.journalApplication.Entity;
 
 
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
 import org.springframework.data.annotation.Id;
 //pojo class
 
-import java.lang.annotation.Documented;
+import java.time.LocalDateTime;
 
 @Document
 public class JournalEntry {
 
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -35,10 +36,15 @@ public class JournalEntry {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public void setDate(LocalDateTime Date) {
+        this.Date = Date;
+    }
 @Id
-    public String  id;
+    public ObjectId id;
     public  String time;
     public  String message;
+    public  LocalDateTime Date;
 
 
 
