@@ -39,7 +39,7 @@ public class JournalEntryControllerV2 {
             return new ResponseEntity<>(Entry.get(), HttpStatus.OK);
 
         }
-        return new ResponseEntity<>(Entry.get(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(Entry.get(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PostMapping("send")
