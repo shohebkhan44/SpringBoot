@@ -20,11 +20,13 @@ public class UserService {
     private UserRepo userRepos;
 
     public void saveUser(User entry) {
+
         userRepos.save(entry);
     }
 
 
     public List<User> getAll(){
+
         return userRepos.findAll();
     }
 

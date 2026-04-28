@@ -2,6 +2,7 @@ package com.example.journalApplication.Entity;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -18,15 +19,13 @@ import java.util.List;
 
 @Document
 @Data
+@NoArgsConstructor
 public class JournalEntry {
 
 
     public ObjectId id;
-    public  String time;
-    @NonNull
     public  String message;
     public  LocalDateTime Date;
-    @DBRef
-    List<JournalEntry> journalEntries=new ArrayList<>();
+
 
 }

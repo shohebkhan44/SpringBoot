@@ -2,6 +2,8 @@ package com.example.journalApplication.controller;
 
 
 import com.example.journalApplication.Entity.JournalEntry;
+import com.example.journalApplication.Entity.User;
+import com.example.journalApplication.Service.UserService;
 import com.example.journalApplication.Service.journalService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,17 @@ public class JournalEntryControllerV2 {
     private Map<Long, JournalEntry> journalEntries = new HashMap<>();
     @Autowired
     private journalService journalServices;
+    @Autowired
+    private UserService userservice;
 
 
-    @GetMapping("getList")
-    public List<JournalEntry> getAll() {
+    @GetMapping("/getList")
+    public List<JournalEntry> getAllEntries() {
+        return journalServices.getAll();
+    }
+
+    @GetMapping("{username}")
+    public List<JournalEntry> getAllEntriesByUserName(@PathVariable String username) {
         return journalServices.getAll();
     }
 
@@ -42,10 +51,11 @@ public class JournalEntryControllerV2 {
         return new ResponseEntity<>(Entry.get(), HttpStatus.FORBIDDEN);
     }
 
-    @PostMapping("send")
-    public boolean createEntry(@RequestBody JournalEntry MyEntry) {
+    @PostMapping("{username}")
+    public boolean createEntry(@RequestBody JournalEntry MyEntry,@PathVariable String username) {
         MyEntry.setDate(LocalDateTime.now());
-        journalServices.saveJournal(MyEntry);
+
+        journalServices.saveJournal(MyEntry,username);
         return true;
 
     }
