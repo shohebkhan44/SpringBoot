@@ -27,7 +27,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-    @PutMapping("{username}")
+    @PutMapping("{usernamee}")
     public ResponseEntity<?> updateUser(@RequestBody User userEntry,@PathVariable String username) {
 
         User userInDB = userservice.findByUserName(username);
