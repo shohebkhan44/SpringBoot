@@ -30,13 +30,18 @@ public class UserService {
         return userRepos.findAll();
     }
 
-    public Optional<User> getAllByName(String name){
+    public User getAllByName(String name){
 
-        return userRepos.findById(name);
+        return userRepos.findByUsername(name);
     }
 
-    public User findByUserName(@NonNull String username) {
+    public User findByUserName(String username) {
 
-       return userRepos.findByUsername(username);
+        if (username == null) {
+            throw new IllegalArgumentException("Username cannot be null");
+        }
+
+        return userRepos.findByUsername(username);
     }
 }
+;

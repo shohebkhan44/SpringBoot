@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -19,6 +20,11 @@ public class UserController {
     @GetMapping
     public List<User> getAll() {
         return userservice.getAll();
+    }
+
+    @GetMapping("{username}")
+    public User getAll(@PathVariable String username) {
+        return userservice.getAllByName(username);
     }
 
     @PostMapping
