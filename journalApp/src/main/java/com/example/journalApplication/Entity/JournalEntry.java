@@ -22,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 public class JournalEntry {
 
-
+@Id
     public ObjectId id;
     public  String message;
     public  LocalDateTime Date;

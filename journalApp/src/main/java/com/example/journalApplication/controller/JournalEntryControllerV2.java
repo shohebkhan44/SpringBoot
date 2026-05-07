@@ -2,7 +2,6 @@ package com.example.journalApplication.controller;
 
 
 import com.example.journalApplication.Entity.JournalEntry;
-import com.example.journalApplication.Entity.User;
 import com.example.journalApplication.Service.UserService;
 import com.example.journalApplication.Service.journalService;
 import org.bson.types.ObjectId;
@@ -16,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
-@RequestMapping("journal")
+@RequestMapping("/journal")
 //will map entire class
 public class JournalEntryControllerV2 {
 
@@ -69,9 +68,17 @@ public class JournalEntryControllerV2 {
     }
 
 
-    @DeleteMapping("delete/{id}")
-    public JournalEntry deleteData(@PathVariable long id){
-        return null;
+    @DeleteMapping("/delete/{username}/{id}")
+    public ResponseEntity<String> deleteData(@PathVariable ObjectId id,@PathVariable String username) {
+
+        boolean isDeleted = journalServices.deleteById(id,username);
+
+        if (isDeleted) {
+            return ResponseEntity.ok("Deleted successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Record not found");
+        }
     }
 
 

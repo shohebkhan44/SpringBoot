@@ -40,4 +40,37 @@ public class journalService {
 
         return journalRepos.findById(id);
     }
+
+    public boolean  deleteById(ObjectId id,String name){
+
+
+        boolean exists = journalRepos.existsById(id);
+        System.out.println("Exists in DB: " + exists);
+
+        if (exists) {
+            User user=userservice.findByUserName(name);
+            user.getJournalEntryList().removeIf(item-> item.getId().equals(id) );
+            userservice.saveUser(user);
+            journalRepos.deleteById(id);
+            return true;
+        }
+        return false;
+
+    }
+    public boolean deleteeById(ObjectId id) {
+
+        System.out.println("Incoming ID: " + id);
+
+        boolean exists = journalRepos.existsById(id);
+        System.out.println("Exists in DB: " + exists);
+
+        if (exists) {
+            journalRepos.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+
+
 }

@@ -43,5 +43,13 @@ public class UserService {
 
         return userRepos.findByUsername(username);
     }
+
+    public boolean deleteById(String id) {
+        if (userRepos.existsById(id)) {
+            userRepos.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
 ;
